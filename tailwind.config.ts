@@ -7,11 +7,30 @@ export default {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {
-      colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+       // change in some style of tailwind 
+       container: {
+        center: true, // Center the container
+        padding: '1rem', // Default padding for all screens
+        screens: {
+          sm: '600px', // Full width on small screens
+          md: '750px', // Custom width on medium screens
+          lg: '990px', // Custom width on large screens
+          xl: '1050px', // Custom width on extra-large screens
+          '2xl': '1200px', // Custom width on 2XL screens
+        },
       },
+    extend: {
+        // Adding some style to my tailwind utilites
+        boxShadow: {
+          'bottom': ' 0 1px 7px #bdbdbd ',
+          'top': ' 0 -1px 7px #bdbdbd ',
+
+        },
+        colors:{
+          main:"#DC3545",
+          sec : "#FE6A59",
+          back : "#F5F4F4"
+        },
     },
   },
   plugins: [],

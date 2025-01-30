@@ -1,15 +1,14 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import {Rubik  } from 'next/font/google';
 import "./globals.css";
+import { Toaster } from "react-hot-toast";
+import NavBar from "@/components/NavBar/NavBar";
+import Footer from "@/components/Footer/Footer";
+import ReduxProvider from "@/components/ReduxPorvider/ReduxProvider";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const rubik = Rubik({
+  subsets: ['latin'],
+  weight: ['400', '500', '700'], // Specify desired weights
 });
 
 export const metadata: Metadata = {
@@ -23,11 +22,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" dir="rtl">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={rubik.className}
       >
-        {children}
+        <Toaster position="top-right" />
+        <ReduxProvider>
+          <NavBar />
+          <div className="min-h-screen  bg-back">
+            <div className="mt-[68px]  py-10 flex-grow relative ">
+         
+                 {children}
+               
+            </div>
+          </div>
+            <Footer />
+            </ReduxProvider>
       </body>
     </html>
   );
