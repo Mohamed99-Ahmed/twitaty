@@ -44,8 +44,8 @@ export default function NavBar() {
   return (
     <>
   
-      <nav className={`fixed top-0 left-0 right-0 shadow-bottom bg-white w-full z-40 border-b border-gray-200 ${kufam.className}`}>
-        <div className="flex flex-col items-start gap-6  flex-wrap sm:flex-row md:items-center justify-between p-4">
+      <nav className={`fixed  top-0 left-0 right-0 shadow-bottom bg-white  z-40 border-b border-gray-200 ${kufam.className}`}>
+        <div className=" flex flex-col items-start gap-6  flex-wrap sm:flex-row md:items-center justify-between p-4">
           {/* start logo */}
           <Link href="/" className="logo">
             <h1 className="text-main uppercase font-bold text-2xl">تويتاتي</h1>

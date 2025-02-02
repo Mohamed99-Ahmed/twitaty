@@ -25,8 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en" dir="rtl">
       <head>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-      <meta name="description" content="موقع بوستاتي هو موقع تواصل اجتماعي " />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />      <meta name="description" content="موقع بوستاتي هو موقع تواصل اجتماعي " />
       <link rel="icon" href={logo.src} />
       </head>
       <body
@@ -34,7 +33,8 @@ export default function RootLayout({
       >
         <Toaster position="top-right" />
         <ReduxProvider>
-          <NavBar />
+        <div className="w-full overflow-hidden">
+        <NavBar />
           <div className="min-h-screen  bg-back">
             <div className="mt-[68px]  py-10 flex-grow relative ">
          
@@ -43,6 +43,7 @@ export default function RootLayout({
             </div>
           </div>
             <Footer />
+        </div>
             </ReduxProvider>
       </body>
     </html>
