@@ -133,7 +133,8 @@ export default function Post({ post, myPost }: { post: postType; myPost: boolean
         toast.success(`تم اضافة تعليقك "${inputComment?.current?.value}"`);
         return data;
       }
-    } catch ({ data }: { message: string }) {
+    } catch (error: any) {
+        const { data } = error.response;
       toast.dismiss(toastBar);
       toast.error(data.message);
     }
@@ -171,7 +172,7 @@ export default function Post({ post, myPost }: { post: postType; myPost: boolean
           <div className="box-setting z-10 rounded-md border-gray-200 border-2 absolute left-2 top-full mt-1 bg-white divide-y-2 ">
             {/* تعديل البوست */}
             <li>
-              <button className="px-12 py-1" onClick={() => updatePost(post._id, post.body, post.image)}>
+              <button className="px-12 py-1" onClick={() => updatePost(post._id, post.body, post.image || "")}>
                 تعديل
               </button>
             </li>
@@ -231,7 +232,7 @@ export default function Post({ post, myPost }: { post: postType; myPost: boolean
         >
           {/* appear the first comment */}
           {post.comments.length > 0 && (
-            <Comment comment={post.comments[0]}  inputComment={inputComment} setIdComment={setIdComment} />
+            <Comment comment={post.comments[0]} postId={post._id} inputComment={inputComment} setIdComment={setIdComment} />
           )}
           {/* all of comments */}
           {showAllComments &&
