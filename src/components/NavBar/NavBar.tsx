@@ -45,13 +45,13 @@ export default function NavBar() {
     <>
   
       <nav className={`fixed top-0 left-0 right-0 shadow-bottom bg-white w-full z-40 border-b border-gray-200 ${kufam.className}`}>
-        <div className="flex gap-6 flex-wrap md:flex-nowrap items-center justify-between p-4">
+        <div className="flex flex-col items-start gap-6  flex-wrap sm:flex-row md:items-center justify-between p-4">
           {/* start logo */}
           <Link href="/" className="logo">
             <h1 className="text-main uppercase font-bold text-2xl">تويتاتي</h1>
           </Link>
           {/* toggle nav */}
-          <div className=" m-0 inline-flex gap-2 md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+          <div className=" m-0 inline-flex gap-2 self-end sm:self-auto md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
              {/* logout */}
              <a className="logout flex gap-3 items-center cursor-pointer">
                   <button onClick={()=>logOut()}>{token?"تسجيل الخروح":"انشاء حساب"}</button>  

@@ -7,7 +7,7 @@ export default function Footer() {
         <footer className=" py-6 bg-white  shadow-top" >
           <div className="container space-y-4 flex flex-col-reverse gap-2 items-center justify-center">
             <p>
-               &copy; الحقوق محفوظة لدي محمد احمد 2024
+               &copy; الحقوق محفوظة لدي محمد احمد 2025
             </p>
             <div className="socials text-lg flex gap-4 ">
               <a href="https://github.com/Mohamed99-Ahmed"  target="_blank">

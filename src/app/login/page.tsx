@@ -21,8 +21,8 @@ export default function Login() {
           
     // vlaidation
     const validationSchema = Yup.object({
-        email: Yup.string().required("Your Email is required").email("Not Valid email"),
-        password: Yup.string().required("password  is required").matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/gm,"At least One (UpperCase , LowerCase , degit, character space) and at least 8 letters"),
+        email: Yup.string().required("يجب كتابة اسمك").email("ايميل عير صحيح"),
+        password: Yup.string().required("يجب كتابة الباسورد").matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/gm, "يجب أن تحتوي كلمة المرور على حرف كبير واحد على الأقل، حرف صغير واحد على الأقل، رقم واحد على الأقل، رمز خاص واحد على الأقل، ويجب أن تكون مكونة من 8 أحرف على الأقل مثل Mona4567@"),
       })
     //   formik
     const formik = useFormik({

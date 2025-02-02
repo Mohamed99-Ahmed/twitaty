@@ -20,16 +20,16 @@ export default function SignUp() {
     name: Yup.string()
       .required("يجب كتابة اسمك")
       .matches(/^[A-Za-zأ-ي]{4,}$/, "يجب ان يحتوي اسمك علي 4 حروف حتي 20 حرف"),
-    email: Yup.string().required("الايميل يجب كتابته").email("ايميل خاطي"),
+    email: Yup.string().required("الايميل يجب كتابته").email("ايميل غير صحيح"),
     password: Yup.string()
-      .required("الباسورد يجب كتابته")
+      .required("يجب كتابة الباسورد")
       .matches(
         /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/gm,
-        "At least One (UpperCase , LowerCase , degit, character space) and at least 8 letters"
+        "يجب أن تحتوي كلمة المرور على حرف كبير واحد على الأقل، حرف صغير واحد على الأقل، رقم واحد على الأقل، رمز خاص واحد على الأقل، ويجب أن تكون مكونة من 8 أحرف على الأقل مثل Mona456@"
       ),
     rePassword: Yup.string()
       .required("الباسورد يجب كتابته")
-      .oneOf([Yup.ref("password")], "الباسوردات يجب أن تتطابق"),
+      .oneOf([Yup.ref("password")], " الباسوردات يجب أن تتطابق مع الباسورد الاصلي"),
   });
   //   formik
   const formik = useFormik({

@@ -5,6 +5,7 @@ import { Toaster } from "react-hot-toast";
 import NavBar from "@/components/NavBar/NavBar";
 import Footer from "@/components/Footer/Footer";
 import ReduxProvider from "@/components/ReduxPorvider/ReduxProvider";
+import logo from "@/../public/assets/imgs/logo..png";
 
 const rubik = Rubik({
   subsets: ['latin'],
@@ -23,6 +24,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" dir="rtl">
+      <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+      <meta name="description" content="موقع بوستاتي هو موقع تواصل اجتماعي " />
+      <link rel="icon" href={logo.src} />
+      </head>
       <body
         className={rubik.className}
       >
