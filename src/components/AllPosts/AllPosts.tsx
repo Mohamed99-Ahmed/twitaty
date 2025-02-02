@@ -1,8 +1,8 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { postType } from '@/types/post.type';
-import { useAppSelector } from '@/hooks/store.hooks';
+import { useAppDispatch, useAppSelector } from '@/hooks/store.hooks';
 import Post from './../Post/Post';
 import Loading from '@/app/loading';
 import { useQuery } from '@tanstack/react-query';
@@ -13,11 +13,18 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
 import 'swiper/css';
+import { actions } from '@/Store/user.slice';
 
 export default function AllPosts() {
+  const dispatch = useAppDispatch();
   const [currentPage, setCurrentPage] = useState<number>(1); // Track current page
   const { token } = useAppSelector((store) => store.userSlice);
-
+  const {setToken} = actions
+// get token
+useEffect(() => {
+  const token = localStorage.getItem("token");
+  dispatch(setToken(token)); // Dispatch an action to set the token
+}, []);
   // Fetch posts for the current page
   const { data, isLoading, isError } = useQuery({
     queryKey: ["posts", currentPage], // Include currentPage in the query key

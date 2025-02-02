@@ -58,7 +58,7 @@ export default function Post({ post, myPost }: { post: postType; myPost: boolean
       const { data } = await axios.request(options);
       if (data.message == "success") {
         toast.success("تم مسح البوست");
-        dispatch(getMyPosts());
+        dispatch(getMyPosts(token));
         toast.dismiss(loadingToast);
       } else if (data.error == "user not found") {
         toast.error("ليس لديك احقية مسح هذا البوست");

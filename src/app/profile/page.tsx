@@ -9,7 +9,7 @@ import Loading from "../loading";
 
 import ProfileUserContent from '@/components/ProfileUserContent/ProfileUserContent';
 import { useAppDispatch, useAppSelector } from '@/hooks/store.hooks';
-import { getMyPosts } from '@/Store/user.slice';
+import { actions, getMyPosts } from '@/Store/user.slice';
 
 import Link from 'next/link';
 export default  function Porfile() {
@@ -17,15 +17,19 @@ export default  function Porfile() {
   const {posts} = useAppSelector((store)=> store.userSlice);
     const {token} = useAppSelector((store)=> store.userSlice);
  
+      const {setToken} = actions
   // call all api function in mount phase
   useEffect(()=>{
-    dispatch( getMyPosts())
+    const token = localStorage.getItem("token");
+    dispatch( getMyPosts(token));
+    // get token 
+    dispatch(setToken(token)); // Dispatch an action to set the token
   },[dispatch])
  
 
   return (
   <>
-    {token ? <section className="profile">
+    {token && <section className="profile">
       <div className="container space-y-16">
          <ProfileUserContent />
         <main className="flex flex-col md:flex-row relative gap-4 md:items-start  justify-between">
@@ -38,9 +42,7 @@ export default  function Porfile() {
         
         </main>
       </div>
-    </section>:  <div className='flex justify-center h-[70vh] items-center text-main'>
-    <Link href="/signup" className='underline'> ليس لديك حساب قم بانشاء حساب</Link>
-      </div>}
+    </section>}
   </>
   );
 }

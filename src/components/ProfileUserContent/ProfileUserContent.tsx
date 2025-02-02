@@ -14,7 +14,7 @@ export default function ProfileUserContent() {
   const dispatch = useAppDispatch();
   const {userData} = useAppSelector((store)=> store.userSlice);
 useEffect(()=>{
-  dispatch(getUserData());
+  dispatch(getUserData(token));
 
 },[dispatch])
  
@@ -43,8 +43,8 @@ useEffect(()=>{
       if(data.message == "success"){
         toast.dismiss(toastLoading);
         toast.success("تم تغير صورة البروفايل")
-          dispatch(getMyPosts())
-          dispatch(getUserData());
+          dispatch(getMyPosts(token))
+          dispatch(getUserData(token));
  
       }
     }catch(data){
