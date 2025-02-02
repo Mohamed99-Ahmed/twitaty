@@ -10,8 +10,6 @@ import Loading from "../loading";
 import ProfileUserContent from '@/components/ProfileUserContent/ProfileUserContent';
 import { useAppDispatch, useAppSelector } from '@/hooks/store.hooks';
 import { actions, getMyPosts } from '@/Store/user.slice';
-
-import Link from 'next/link';
 export default  function Porfile() {
   const dispatch = useAppDispatch()
   const {posts} = useAppSelector((store)=> store.userSlice);
@@ -24,7 +22,7 @@ export default  function Porfile() {
     dispatch( getMyPosts(token));
     // get token 
     dispatch(setToken(token)); // Dispatch an action to set the token
-  },[dispatch])
+  },[dispatch,dispatch(setToken(token))])
  
 
   return (

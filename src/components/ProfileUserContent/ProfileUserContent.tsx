@@ -16,7 +16,7 @@ export default function ProfileUserContent() {
 useEffect(()=>{
   dispatch(getUserData(token));
 
-},[dispatch])
+},[dispatch,token])
  
 
   // Change profile photo
