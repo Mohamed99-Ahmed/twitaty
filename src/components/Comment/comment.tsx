@@ -1,5 +1,5 @@
 "use client"
-import React, { useState, RefObject, useEffect } from 'react'
+import React, { useState, RefObject } from 'react'
 import { commentType } from '@/types/post.type';
 import Image from 'next/image';
 import human from "../../../public/assets/imgs/human.png";

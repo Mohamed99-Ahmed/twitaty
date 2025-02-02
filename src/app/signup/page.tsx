@@ -6,7 +6,6 @@ import Button from "../../components/Button/Button";
 
 import { useRouter } from "next/navigation";
 
-import { useAppDispatch } from "@/hooks/store.hooks";
 import axios from "axios";
 import toast from "react-hot-toast";
 import Link from "next/link";

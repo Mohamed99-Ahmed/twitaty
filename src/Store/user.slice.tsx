@@ -46,8 +46,11 @@ export const login = createAsyncThunk("user/login", async (values:{email:string,
         } else {
             throw new Error(data.message || "Login failed");
         }
-    } catch (error: unknown) {
+    } catch (data) {
         toast.dismiss(loadToast);
+        console.log(data);
+        toast.error( "هناك خطا في السيرفر"); 
+        
     }
 });
 // Get User Data 
@@ -94,12 +97,12 @@ const user = createSlice({
             state.loadingPosts = false;
             state.errorPosts = false;
         });
-        builder.addCase(getMyPosts.pending, (state, action) => {
+        builder.addCase(getMyPosts.pending, (state) => {
             state.loadingPosts = true;
             state.errorPosts = false;
             state.posts = null
         });
-        builder.addCase(getMyPosts.rejected, (state, action) => {
+        builder.addCase(getMyPosts.rejected, (state,) => {
             state.loadingPosts = false;
             state.errorPosts = true;
             state.posts = null

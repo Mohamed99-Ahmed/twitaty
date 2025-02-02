@@ -1,6 +1,5 @@
 "use client"
-import { userType } from '@/types/user.type'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 import Image from "next/image";
 import human from "../../../public/assets/imgs/human.png";
 import { FiUploadCloud } from "react-icons/fi";
