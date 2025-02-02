@@ -65,7 +65,7 @@ export default function SignUp() {
             navigate.push("/login");
           }, 3000);
           return data;
-        } else if ((data.message = "Request failed with status code 409")) {
+        } else if (data.status === 409) {
           toast.error("هذا الحساب مسجل مسبقا برجاء ادخال حساب اخر ");
         } else {
           throw new Error(data.message || "Login failed");
@@ -75,7 +75,7 @@ export default function SignUp() {
         toast.error("هناك خطا" + error);
       }
     },
-    
+
     validationSchema,
   });
   return (
