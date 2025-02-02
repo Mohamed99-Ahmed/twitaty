@@ -1,16 +1,16 @@
 
 "use client"
 import CreatePost from './../../components/CreatePost/CreatePost';
-import axios from "axios";
+
 import Post from "@/components/Post/Post";
 import { postType } from "@/types/post.type";
-import { Suspense, useEffect, useState } from "react";
+import {  useEffect } from "react";
 import Loading from "../loading";
-import { userType } from '@/types/user.type';
+
 import ProfileUserContent from '@/components/ProfileUserContent/ProfileUserContent';
 import { useAppDispatch, useAppSelector } from '@/hooks/store.hooks';
-import { getMyPosts, getUserData } from '@/Store/user.slice';
-import { useQuery } from '@tanstack/react-query';
+import { getMyPosts } from '@/Store/user.slice';
+
 import Link from 'next/link';
 export default  function Porfile() {
   const dispatch = useAppDispatch()
@@ -20,7 +20,7 @@ export default  function Porfile() {
   // call all api function in mount phase
   useEffect(()=>{
     dispatch( getMyPosts())
-  },[])
+  },[dispatch])
  
 
   return (

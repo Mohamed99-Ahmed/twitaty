@@ -1,4 +1,4 @@
-import { commentType } from "@/types/post.type";
+
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
        

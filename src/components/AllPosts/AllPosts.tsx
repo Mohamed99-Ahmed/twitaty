@@ -19,7 +19,7 @@ export default function AllPosts() {
   const { token } = useAppSelector((store) => store.userSlice);
 
   // Fetch posts for the current page
-  const { data, isLoading, isError, error } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryKey: ["posts", currentPage], // Include currentPage in the query key
     queryFn: () => getAllPosts(currentPage), // Fetch data for the current page
   });
@@ -99,9 +99,8 @@ export default function AllPosts() {
           
         >
           {Array.from({ length: data?.paginationInfo.numberOfPages || 1 }, (_, i) => (
-            <SwiperSlide>
+            <SwiperSlide key={i + 1}>
               <button
-                key={i + 1}
                 onClick={() => handlePageChange(i + 1)}
                 className={`px-4 py-2 ${currentPage === i + 1 ? 'bg-main text-white' : 'bg-sec text-white'
                   } rounded`}

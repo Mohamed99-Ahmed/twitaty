@@ -1,11 +1,11 @@
-import { userType,userState } from "@/types/user.type";
+import { userState } from "@/types/user.type";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import toast from 'react-hot-toast';
 import axios from 'axios';
 
  // inisial State
 const initialState:userState = {
-    token: localStorage.getItem("token"),
+    token:localStorage.getItem("token"),
     userData: null,
     // posts
     posts : null,
@@ -65,29 +65,9 @@ export const getUserData = createAsyncThunk("user/getUserData",async ()=>{
         return data.user;
       }
      }catch(data){
-    
+        toast.error("هناك خطا");
      }
 })
-// Update Post
-// export const updatePost = createAsyncThunk("user/getUserData",async (id:string,formData)=>{
-//     const options = {
-//         method:"PUT",
-//         url : `https://linked-posts.routemisr.com/posts/${id}`,
-//         headers:{
-//           token: localStorage.getItem("token") || null,
-//         },
-//         data:formData
-//       }
-//      try{
-//       const {data} = await axios.request(options);
-//       if(data.message == "success"){
-//             toast.success("تم تعديل البوست بنجاح");
-//       }
-//      }catch(data){
-//         toast.error("هناك خطا");
-//         console.log(data)
-//      }
-// })
 // Slice 
 const user = createSlice({
     name: "user",
@@ -123,13 +103,7 @@ const user = createSlice({
             state.loadingPosts = false;
             state.errorPosts = true;
             state.posts = null
-        });
-        // Update Post
-        // builder.addCase(updatePost.fulfilled, (state, action) => {
-        //     state.posts = action.payload;
-        //     }
-        // )
-        
+      });
 
     }
 });

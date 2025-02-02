@@ -8,18 +8,16 @@ import { useAppDispatch, useAppSelector } from '@/hooks/store.hooks';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { getMyPosts, getUserData } from '@/Store/user.slice';
-import Link from 'next/link';
 
 export default function ProfileUserContent() {
   const {token} = useAppSelector((store)=> store.userSlice);
   const inputFile = useRef<HTMLInputElement>(null);
-  const [user, setUser] = useState<userType | any>(null);
   const dispatch = useAppDispatch();
   const {userData} = useAppSelector((store)=> store.userSlice);
 useEffect(()=>{
   dispatch(getUserData());
 
-},[])
+},[dispatch])
  
 
   // Change profile photo

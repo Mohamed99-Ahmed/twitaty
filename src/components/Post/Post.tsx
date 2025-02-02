@@ -23,7 +23,6 @@ export default function Post({ post, myPost }: { post: postType; myPost: boolean
   const inputComment = useRef<HTMLInputElement | null>(null);
   const [idComment, setIdComment] = useState<string>("");
   const dispatch = useAppDispatch();
-  const { postText, postImage } = useAppSelector((store) => store.postSlice);
   const { token } = useAppSelector((store) => store.userSlice);
 
   // Get comments of post
@@ -36,16 +35,13 @@ export default function Post({ post, myPost }: { post: postType; myPost: boolean
       },
     };
 
-    try {
       const { data } = await axios.request(options);
       console.log(data);
       if (data.message == "success") {
         setAllComments(data.comments);
         return data;
       }
-    } catch (data) {
-      toast.error("هناك خطا");
-    }
+   
   }
 
   // delete Post
@@ -107,7 +103,8 @@ export default function Post({ post, myPost }: { post: postType; myPost: boolean
       }
     } catch (data) {
       toast.dismiss(toastBar);
-      toast.error("ليس لديك احقية تغير تعليك غيرك");
+      toast.error("ليس لديك احقية تغير تعليك غيرك"  );
+      console.log(data)
     }
   }
 
@@ -133,10 +130,10 @@ export default function Post({ post, myPost }: { post: postType; myPost: boolean
         toast.success(`تم اضافة تعليقك "${inputComment?.current?.value}"`);
         return data;
       }
-    } catch (error: any) {
-        const { data } = error.response;
+    } catch (data) {
       toast.dismiss(toastBar);
-      toast.error(data.message);
+      toast.error("ليس لديك احقية اضافة تعليق");
+      console.log(data);
     }
   }
 

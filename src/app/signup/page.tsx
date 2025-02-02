@@ -1,5 +1,5 @@
 "use client";
-import { Formik, useFormik } from "formik";
+import {  useFormik } from "formik";
 import React from "react";
 import * as Yup from "yup";
 import Button from "../../components/Button/Button";
@@ -7,7 +7,6 @@ import Button from "../../components/Button/Button";
 import { useRouter } from "next/navigation";
 
 import { useAppDispatch } from "@/hooks/store.hooks";
-import { login } from "@/Store/user.slice";
 import axios from "axios";
 import toast from "react-hot-toast";
 import Link from "next/link";
@@ -15,7 +14,6 @@ import Link from "next/link";
 // import { login } from './../../Store/user.slice';
 
 export default function SignUp() {
-  const dispatch = useAppDispatch();
   const navigate = useRouter();
 
   // vlaidation
@@ -75,7 +73,7 @@ export default function SignUp() {
         }
       } catch (error) {
         toast.dismiss(loadToast);
-        toast.error("هذا الحساب مسجل مسبقا برجاء ادخال حساب اخر ");
+        toast.error("هناك خطا" + error);
       }
     },
     validationSchema,

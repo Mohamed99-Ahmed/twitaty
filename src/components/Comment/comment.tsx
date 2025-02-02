@@ -1,5 +1,5 @@
 "use client"
-import React, { ReactElement, useState, RefObject } from 'react'
+import React, { useState, RefObject, useEffect } from 'react'
 import { commentType } from '@/types/post.type';
 import Image from 'next/image';
 import human from "../../../public/assets/imgs/human.png";
@@ -9,7 +9,7 @@ import axios from 'axios';
 
 
 
-export default function Comment({comment,postId,inputComment,setIdComment,getAllComments}:{comment?:commentType,inputComment?:RefObject<HTMLInputElement | null>,setIdComment?:React.Dispatch<React.SetStateAction<string>>, getAllComments?:Function,postId:string}) {
+export default function Comment({comment,postId,inputComment,setIdComment,getAllComments}:{comment?:commentType,inputComment?:RefObject<HTMLInputElement | null>,setIdComment?:React.Dispatch<React.SetStateAction<string>>, getAllComments?:(postId: string) => void,postId:string}) {
     // States
 const [settingComment, setSettingComment] = useState<boolean>(false);
 // handle img with path

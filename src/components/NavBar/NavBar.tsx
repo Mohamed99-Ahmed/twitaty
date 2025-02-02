@@ -6,7 +6,6 @@ import { CiLogout } from "react-icons/ci";
 import { Kufam  } from 'next/font/google';
 import { usePathname, useRouter } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "@/hooks/store.hooks";
-import { store } from './../../Store/Store';
 import { actions } from "@/Store/user.slice";
 
 const kufam = Kufam({
@@ -18,7 +17,7 @@ export default function NavBar() {
   const path = usePathname();
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(true);
-  let {token} = useAppSelector((store)=> store.userSlice);
+  const {token} = useAppSelector((store)=> store.userSlice);
   const {LogOut} = actions;
   const dispatch = useAppDispatch();
   // in updatin phase of component
@@ -48,9 +47,9 @@ export default function NavBar() {
       <nav className={`fixed top-0 left-0 right-0 shadow-bottom bg-white w-full z-40 border-b border-gray-200 ${kufam.className}`}>
         <div className="flex gap-6 flex-wrap md:flex-nowrap items-center justify-between p-4">
           {/* start logo */}
-          <a href="/" className="logo">
+          <Link href="/" className="logo">
             <h1 className="text-main uppercase font-bold text-2xl">تويتاتي</h1>
-          </a>
+          </Link>
           {/* toggle nav */}
           <div className=" m-0 inline-flex gap-2 md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
              {/* logout */}
@@ -86,7 +85,7 @@ export default function NavBar() {
                   <Link
                     href="/profile"
                     className={ `${path === "/profile" ? "text-sec font-semibold":""}navLink block py-2 px-3 rounded md:bg-transparent hover:text-main `}
-                    onClick={(e) => 
+                    onClick={() => 
                       setIsOpen(!isOpen)}
                   >
                     بروفايلي
