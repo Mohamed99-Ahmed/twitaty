@@ -11,8 +11,7 @@ export default  function Home() {
    <section className="home">
       <div className="container">
         <CreatePost/>
-         <AllPosts/>
-   
+          <AllPosts />
       </div>
       </section>
       )

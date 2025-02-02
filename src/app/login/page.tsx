@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation';
 
 import { useAppDispatch } from '@/hooks/store.hooks';
 import { login } from '@/Store/user.slice';
+import Link from 'next/link';
 
 
 // import { login } from './../../Store/user.slice';
@@ -85,7 +86,10 @@ export default function Login() {
           </div>
            {formik.touched.email && formik.errors.email? <p className="error text-main m-4 capitalize"> * {formik.errors.email}</p>:""}
             {formik.touched.password && formik.errors.password? <p className="error text-main m-4 capitalize"> * {formik.errors.password }</p>:""}
-          <Button className='w-full ' >تسجيل الدخول</Button>
+            {/* button submit or go to sign up */}
+               <Button className='w-full ' >تسجيل الدخول</Button>
+               <p className='uppercase font-semibold  text-gray-800 text-lg text-center'>اذا لم  تملك حساب</p>
+               <Link href="/signup" className='signup text-xl underline text-center block  '>انشاء حساب</Link>   
             </form>
         </div>
 

@@ -1,10 +1,10 @@
-export default function Loading() {
+export default function Loading({className}:{className?:string}) {
 
 
 
     return (
-      <>
-          <p> loading ...............</p>
-      </>
+      <div className={`flex justify-center ${className}`}>
+          <span className={`loader`}></span>
+      </div>
     );
   }

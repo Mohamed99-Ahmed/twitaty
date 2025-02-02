@@ -9,7 +9,7 @@ import axios from 'axios';
 
 
 
-export default function Comment({comment,inputComment,setIdComment}:{comment:commentType,inputComment:HTMLInputElement,setIdComment:React.Dispatch<React.SetStateAction<string>>}) {
+export default function Comment({comment,postId,inputComment,setIdComment,getAllComments}:{comment:commentType,inputComment:HTMLInputElement,setIdComment:React.Dispatch<React.SetStateAction<string>>, getAllComments:Function,postId:string}): ReactElement {
     // States
 const [settingComment, setSettingComment] = useState<boolean>(false);
 // handle img with path
@@ -41,6 +41,7 @@ const [settingComment, setSettingComment] = useState<boolean>(false);
           const { data } = await axios.request(options);
           if (data.message == "success") {
             toast.dismiss(toastBar);
+            getAllComments(postId); // get all comments after delete
             toast.success(`تم مسح التعليق بنجاح`);
             console.log(data);
             return data;

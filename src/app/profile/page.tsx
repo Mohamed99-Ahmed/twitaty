@@ -9,58 +9,38 @@ import Loading from "../loading";
 import { userType } from '@/types/user.type';
 import ProfileUserContent from '@/components/ProfileUserContent/ProfileUserContent';
 import { useAppDispatch, useAppSelector } from '@/hooks/store.hooks';
-import { getUserData } from '@/Store/user.slice';
+import { getMyPosts, getUserData } from '@/Store/user.slice';
+import { useQuery } from '@tanstack/react-query';
+import Link from 'next/link';
 export default  function Porfile() {
   const dispatch = useAppDispatch()
-  const [user, setUser] = useState<userType | any>(null)
-  const [posts, setPosts] = useState<postType[] | null>(null)
-  const {token} = useAppSelector((store)=> store.userSlice);
-  const {userData} = useAppSelector((store)=> store.userSlice);
-  
-
-  const formData = new FormData();
-  useEffect(()=>{
-    // Get my Data (user Data)
-    async function userData(){
-      await dispatch(getUserData());
-      setUser(userData)
-    }
-  // Get all My Post
-   async function getUserPosts(){
-    const options = {
-      method:"GET",
-      url : "https://linked-posts.routemisr.com/users/664bcf3e33da217c4af21f00/posts",
-      headers:{
-        token 
-      }
-    }
-    const {data} = await axios.request(options);
-    setPosts(data.posts)
-    return data.posts;
-  }
+  const {posts} = useAppSelector((store)=> store.userSlice);
+    const {token} = useAppSelector((store)=> store.userSlice);
+ 
   // call all api function in mount phase
-  (async function callApiFuc(){
-    await userData();
-      await getUserPosts();
-  })();
+  useEffect(()=>{
+    dispatch( getMyPosts())
   },[])
  
 
   return (
-    <section className="profile">
+  <>
+    {token ? <section className="profile">
       <div className="container space-y-16">
-        {userData && <ProfileUserContent user={userData}/>}
+         <ProfileUserContent />
         <main className="flex flex-col md:flex-row relative gap-4 md:items-start  justify-between">
             <CreatePost className="md:sticky top-20"/>
-             <Suspense fallback={<Loading/>}>
-             <div className='space-y-8'>
-                    { posts?.map((post:postType)=>{return(
-                          <Post key={post._id} post={post}/>
+             {posts?<div className='space-y-8 grow-[1]'>
+                    { posts.map((post:postType)=>{return(
+                          <Post key={post._id} post={post} myPost={true}/>
                    )})}
-              </div>
-             </Suspense>
+              </div>:<Loading className='flex grow-[1] justify-center'/>}
+        
         </main>
       </div>
-    </section>
+    </section>:  <div className='flex justify-center h-[70vh] items-center text-main'>
+    <Link href="/signup" className='underline'> ليس لديك حساب قم بانشاء حساب</Link>
+      </div>}
+  </>
   );
 }

@@ -10,6 +10,7 @@ import { useAppDispatch } from "@/hooks/store.hooks";
 import { login } from "@/Store/user.slice";
 import axios from "axios";
 import toast from "react-hot-toast";
+import Link from "next/link";
 
 // import { login } from './../../Store/user.slice';
 
@@ -80,7 +81,7 @@ export default function SignUp() {
     validationSchema,
   });
   return (
-    <section className="signin min-h-[70vh] flex  items-center">
+    <section className="signup min-h-[70vh] flex  items-center">
       <div className="container ">
         <form
           onSubmit={formik.handleSubmit}
@@ -272,6 +273,8 @@ export default function SignUp() {
             </div>
           </div>
           <Button className="w-full ">انشاء حياب</Button>
+          <p className='uppercase font-semibold  text-gray-800 text-lg text-center'>اذا كنت تملك حساب </p>
+          <Link href="/login" className='login text-xl underline text-center block  '>تسحيل الدخول</Link>   
         </form>
       </div>
     </section>

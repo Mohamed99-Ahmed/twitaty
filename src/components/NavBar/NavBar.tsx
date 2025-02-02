@@ -28,12 +28,16 @@ export default function NavBar() {
   }
   //logout funciton 
   function logOut(){
+    if(token){
       dispatch(LogOut())
       localStorage.removeItem("token")
-    console.log(token);
     setTimeout(()=>{
       router.push("/login")
     },3000)
+    }
+    else{
+      router.push("/signup")
+    }
     
     
   } 
@@ -51,7 +55,7 @@ export default function NavBar() {
           <div className=" m-0 inline-flex gap-2 md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
              {/* logout */}
              <a className="logout flex gap-3 items-center cursor-pointer">
-                  <button onClick={()=>logOut()}>تسجيل الخروج</button>  
+                  <button onClick={()=>logOut()}>{token?"تسجيل الخروح":"انشاء حساب"}</button>  
                   <CiLogout  className="text-xl"/>
                </a>
             {/* start toggle  */}

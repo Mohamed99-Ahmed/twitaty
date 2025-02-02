@@ -13,10 +13,10 @@ export default {
         padding: '1rem', // Default padding for all screens
         screens: {
           sm: '600px', // Full width on small screens
-          md: '750px', // Custom width on medium screens
-          lg: '990px', // Custom width on large screens
-          xl: '1050px', // Custom width on extra-large screens
-          '2xl': '1200px', // Custom width on 2XL screens
+          md: '550px', // Custom width on medium screens
+          lg: '700px', // Custom width on large screens
+          xl: '750px', // Custom width on extra-large screens
+          '2xl': '800px', // Custom width on 2XL screens
         },
       },
     extend: {
