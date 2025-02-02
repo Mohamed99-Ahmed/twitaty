@@ -24,7 +24,7 @@ export default function AllPosts() {
 useEffect(() => {
   const token = localStorage.getItem("token");
   dispatch(setToken(token)); // Dispatch an action to set the token
-}, [ dispatch(setToken(token))]);
+}, [ dispatch,setToken]);
   // Fetch posts for the current page
   const { data, isLoading, isError } = useQuery({
     queryKey: ["posts", currentPage], // Include currentPage in the query key

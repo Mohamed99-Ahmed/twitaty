@@ -22,7 +22,7 @@ export default  function Porfile() {
     dispatch( getMyPosts(token));
     // get token 
     dispatch(setToken(token)); // Dispatch an action to set the token
-  },[dispatch,dispatch(setToken(token))])
+  },[dispatch,setToken])
  
 
   return (

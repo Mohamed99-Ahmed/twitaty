@@ -50,7 +50,7 @@ export default function CreatePost({ className }: { className?: string }) {
       if (data.message === 'success') {
         toast.success("تم اضافة البوست بنجاح");
         toast.dismiss(toastBar);
-        await dispatch(getMyPosts());
+        await dispatch(getMyPosts(token));
         resetForm();
       }
     } catch (error) {
@@ -86,7 +86,7 @@ export default function CreatePost({ className }: { className?: string }) {
         toast.success("تم تعديل البوست بنجاح");
         dispatch(resetPostId());
         toast.dismiss(toastBar);
-        await dispatch(getMyPosts());
+        await dispatch(getMyPosts(token));
         resetForm();
       }
     } catch (error) {
