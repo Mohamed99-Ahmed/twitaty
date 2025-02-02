@@ -9,22 +9,17 @@ import Loading from "../loading";
 
 import ProfileUserContent from '@/components/ProfileUserContent/ProfileUserContent';
 import { useAppDispatch, useAppSelector } from '@/hooks/store.hooks';
-import { actions, getMyPosts } from '@/Store/user.slice';
+import {  getMyPosts } from '@/Store/user.slice';
 export default  function Porfile() {
   const dispatch = useAppDispatch()
   const {posts} = useAppSelector((store)=> store.userSlice);
     const {token} = useAppSelector((store)=> store.userSlice);
- 
-      const {setToken} = actions
   // call all api function in mount phase
   useEffect(()=>{
-    const token = localStorage.getItem("token");
+    // get MyPosts 
     dispatch( getMyPosts(token));
-    // get token 
-    dispatch(setToken(token)); // Dispatch an action to set the token
-  },[dispatch,token])
+  },[])
  
-
   return (
   <>
     {token && <section className="profile">
