@@ -23,7 +23,6 @@ const eslintConfig = [
   // Custom rules
   {
     rules: {
-      "no-console": "warn", // Warn on console.log
       "react/prop-types": "off", // Disable prop-types for TypeScript projects
       "@typescript-eslint/no-unused-vars": "warn", // Warn on unused variables
     },
