@@ -75,6 +75,7 @@ export default function SignUp() {
         toast.error("هناك خطا" + error);
       }
     },
+    
     validationSchema,
   });
   return (
