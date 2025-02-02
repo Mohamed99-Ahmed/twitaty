@@ -69,6 +69,7 @@ export const getUserData = createAsyncThunk("user/getUserData",async ()=>{
       }
      }catch(data){
         toast.error("هناك خطا");
+        console.log(data)
      }
 })
 // Slice 
