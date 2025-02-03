@@ -8,6 +8,7 @@ import { getMyPosts } from "@/Store/user.slice";
 import { resetPostId } from "@/Store/Posts.slice";
 
 export default function CreatePost({ className }: { className?: string }) {
+  // states
   const text = useRef<HTMLTextAreaElement>(null);
   const inputFile = useRef<HTMLInputElement>(null);
   const [nameImg, setNameImg] = useState<string>("");
@@ -36,7 +37,7 @@ export default function CreatePost({ className }: { className?: string }) {
     if (inputFile.current?.files?.[0]) {
       formData.append("image", inputFile.current.files[0]);
     }
-
+    // option of api
     const options = {
       method: "POST",
       url: "https://linked-posts.routemisr.com/posts",
@@ -71,7 +72,7 @@ export default function CreatePost({ className }: { className?: string }) {
     if (inputFile.current?.files?.[0]) {
       formData.append("image", inputFile.current.files[0]);
     }
-
+    // options of api
     const options = {
       method: "PUT",
       url: `https://linked-posts.routemisr.com/posts/${id}`,
@@ -84,9 +85,12 @@ export default function CreatePost({ className }: { className?: string }) {
       const { data } = await axios.request(options);
       if (data.message === "success") {
         toast.success("تم تعديل البوست بنجاح");
+        // after update post reset post  
         dispatch(resetPostId());
         toast.dismiss(toastBar);
+        // after update post call allpost funcion 
         await dispatch(getMyPosts(token));
+        // reset form create post after update post
         resetForm();
       }
     } catch (error) {
@@ -96,7 +100,7 @@ export default function CreatePost({ className }: { className?: string }) {
     }
   }
 
-  // Reset form fields
+  // Reset form fields after(update or create) post
   function resetForm() {
     if (text.current) text.current.value = "";
     if (inputFile.current) inputFile.current.value = "";
@@ -111,7 +115,8 @@ export default function CreatePost({ className }: { className?: string }) {
   };
 
   return (
-    <section className={`create-post bg-white p-4 flex flex-col gap-4 mb-20 ${className}`}>
+    <section className={`create-post bg-white p-4 flex flex-col gap-4 mb-20   ${className}`}>
+      {/* post text */}
       <textarea
         id="message"
         rows={4}
@@ -119,7 +124,7 @@ export default function CreatePost({ className }: { className?: string }) {
         placeholder="اكتب محتوى البوست"
         ref={text}
       ></textarea>
-
+        {/* container of post img */}
       <div className="put img flex items-center justify-center w-full">
         <label
           htmlFor="dropzone-file"
@@ -142,15 +147,15 @@ export default function CreatePost({ className }: { className?: string }) {
               />
             </svg>
             <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-              {nameImg ? `${nameImg}` : 
-              <>
-              <span className="font-semibold">Click to upload</span> or drag and drop
-              <p className="text-xs text-gray-500 dark:text-gray-400">
-              SVG, PNG, JPEG, BMP, WEBP, JPG, or GIF
-              </p>
-              </>}
+              {nameImg ? `${nameImg}` :
+                <>
+                  <span className="font-semibold">Click to upload</span> or drag and drop
+                  <p className="text-xs text-gray-500 dark:text-gray-400">
+                    SVG, PNG, JPEG, BMP, WEBP, JPG, or GIF
+                  </p>
+                </>}
             </p>
-          
+
           </div>
           <input
             id="dropzone-file"
@@ -162,7 +167,7 @@ export default function CreatePost({ className }: { className?: string }) {
           />
         </label>
       </div>
-
+      {/* button of update post if you have postId of create post if you not have */}
       <Button onClick={() => postId ? updatePost(postId) : createPost()}>
         {postId ? "تعديل البوست" : "انشاء بوست"}
       </Button>

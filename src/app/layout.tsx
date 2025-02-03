@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import {Rubik  } from 'next/font/google';
+import { Rubik } from 'next/font/google';
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import NavBar from "@/components/NavBar/NavBar";
@@ -25,26 +25,30 @@ export default function RootLayout({
   return (
     <html lang="en" dir="rtl">
       <head>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />      <meta name="description" content="موقع بوستاتي هو موقع تواصل اجتماعي " />
-      <link rel="icon" href={logo.src} />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />      <meta name="description" content="موقع بوستاتي هو موقع تواصل اجتماعي " />
+        <link rel="icon" href={logo.src} />
       </head>
       <body
         className={rubik.className}
       >
         <Toaster position="top-right" />
+        {/* Redux provider for all aplication */}
         <ReduxProvider>
-        <div className="w-full overflow-hidden">
-        <NavBar />
-          <div className="min-h-screen  bg-back">
-            <div className="mt-[68px]  py-10 flex-grow relative ">
-         
-                 {children}
-               
+          <div className="w-full overflow-hidden">
+            {/* Navbar component */}
+            <NavBar />
+            {/* pages of website */}
+            <div className="min-h-screen  bg-back">
+              <div className="mt-[140px] sm:mt-[68px]   py-10 flex-grow relative ">
+
+                {children}
+
+              </div>
             </div>
-          </div>
+            {/* Footer component */}
             <Footer />
-        </div>
-            </ReduxProvider>
+          </div>
+        </ReduxProvider>
       </body>
     </html>
   );

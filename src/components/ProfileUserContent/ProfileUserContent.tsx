@@ -9,24 +9,26 @@ import toast from 'react-hot-toast';
 import { getMyPosts, getUserData } from '@/Store/user.slice';
 
 export default function ProfileUserContent() {
+  // states
   const {token} = useAppSelector((store)=> store.userSlice);
   const inputFile = useRef<HTMLInputElement>(null);
   const dispatch = useAppDispatch();
   const {userData} = useAppSelector((store)=> store.userSlice);
+
+// getUserData in mout phase and updatePase
 useEffect(()=>{
   dispatch(getUserData(token));
-
 },[dispatch,token])
  
 
-  // Change profile photo
+  // Change profile photo of my profile
   async function changeProfilePhoto(){
      const formData = new FormData()
     if (inputFile.current?.files?.[0]) {
       formData.append("photo", inputFile.current.files[0]);
       console.log(inputFile.current.files[0])
     }
-
+    // option of api
     const options = {
       method:"PUT",
       url : "https://linked-posts.routemisr.com/users/upload-photo",
@@ -42,8 +44,10 @@ useEffect(()=>{
   
       if(data.message == "success"){
         toast.dismiss(toastLoading);
-        toast.success("تم تغير صورة البروفايل")
+        toast.success("تم تغير صورة البروفايل");
+        // getMyPosts funciton refresh after change img profile
           dispatch(getMyPosts(token))
+            // getUserData funciton refresh after change img profile
           dispatch(getUserData(token));
  
       }
@@ -69,6 +73,7 @@ useEffect(()=>{
               className="relative group/parent  cursor-pointer" 
               htmlFor="file-upload"
             >
+              {/* img phot if img come from api if not put human relative img */}
               <Image
                src={userData.photo || human}
                 alt="human face logo"
@@ -81,6 +86,7 @@ useEffect(()=>{
                 <FiUploadCloud size={20}/>
               </div>
             </label>
+            {/* Details about me */}
         </figure>
             <article className="space-y-4">
               <p className="font-semibold ">الاسم: <span className="text-gray-600 mr-3 font-normal">{userData.name}</span></p>

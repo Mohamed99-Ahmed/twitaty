@@ -11,42 +11,39 @@ import { login } from '@/Store/user.slice';
 import Link from 'next/link';
 
 
-// import { login } from './../../Store/user.slice';
-
-
-
 export default function Login() {
-    const dispatch = useAppDispatch();
-    const navigate = useRouter();
-          
-    // vlaidation
-    const validationSchema = Yup.object({
-        email: Yup.string().required("يجب كتابة اسمك").email("ايميل عير صحيح"),
-        password: Yup.string().required("يجب كتابة الباسورد").matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/gm, "يجب أن تحتوي كلمة المرور على حرف كبير واحد على الأقل، حرف صغير واحد على الأقل، رقم واحد على الأقل، رمز خاص واحد على الأقل، ويجب أن تكون مكونة من 8 أحرف على الأقل مثل Mona4567@"),
-      })
-    //   formik
-    const formik = useFormik({
-        initialValues:{
-            email:"",
-            password:""
-        },
-        onSubmit:async function (values){  
-          const data = await dispatch(login(values));
-            console.log(data)
-           if(data.payload.message == "success"){
-            setTimeout(()=>{
-              navigate.push("/")
-             },3000)
-           }
-            
-        },
-        validationSchema
-    })
+  const dispatch = useAppDispatch();
+  const navigate = useRouter();
+
+  // vlaidation
+  const validationSchema = Yup.object({
+    email: Yup.string().required("يجب كتابة اسمك").email("ايميل عير صحيح"),
+    password: Yup.string().required("يجب كتابة الباسورد").matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/gm, "يجب أن تحتوي كلمة المرور على حرف كبير واحد على الأقل، حرف صغير واحد على الأقل، رقم واحد على الأقل، رمز خاص واحد على الأقل، ويجب أن تكون مكونة من 8 أحرف على الأقل مثل Mona4567@"),
+  })
+  //   formik
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: ""
+    },
+    onSubmit: async function (values) {
+      // call a funciton login from user slice then if success navigate to home page
+      const data = await dispatch(login(values));
+      if (data.payload.message == "success") {
+        setTimeout(() => {
+          navigate.push("/")
+        }, 3000)
+      }
+
+    },
+    validationSchema
+  })
   return (
     <section className='signin  '>
-        <div className="container min-h-[70vh] flex items-center justify-center">
-            <form onSubmit={formik.handleSubmit} className='bg-white p-12 w-full md:w-[80%] space-y-8 rounded-md shadow-md border-sec border-1'>
-            <div className="relative z-0 w-full mb-5 group">
+      <div className="container min-h-[70vh] flex items-center justify-center">
+        <form onSubmit={formik.handleSubmit} className='bg-white p-12 w-full md:w-[80%] space-y-8 rounded-md shadow-md border-sec border-1'>
+          {/* email input */}
+          <div className="relative z-0 w-full mb-5 group">
             <input
               type="email"
               value={formik.values.email}
@@ -64,8 +61,9 @@ export default function Login() {
             >
               البريد الالكتروني
             </label>
-             </div>
-             <div className="relative z-0 w-full mb-5 group">
+          </div>
+          {/* password input */}
+          <div className="relative z-0 w-full mb-5 group">
             <input
               type="password"
               name="password"
@@ -84,14 +82,15 @@ export default function Login() {
               الباسورد
             </label>
           </div>
-           {formik.touched.email && formik.errors.email? <p className="error text-main m-4 capitalize"> * {formik.errors.email}</p>:""}
-            {formik.touched.password && formik.errors.password? <p className="error text-main m-4 capitalize"> * {formik.errors.password }</p>:""}
-            {/* button submit or go to sign up */}
-               <Button className='w-full ' >تسجيل الدخول</Button>
-               <p className='uppercase font-semibold  text-gray-800 text-lg text-center'>اذا لم  تملك حساب</p>
-               <Link href="/signup" className='signup text-xl underline text-center block  '>انشاء حساب</Link>   
-            </form>
-        </div>
+          {/* errors messege for email and password */}
+          {formik.touched.email && formik.errors.email ? <p className="error text-main m-4 capitalize"> * {formik.errors.email}</p> : ""}
+          {formik.touched.password && formik.errors.password ? <p className="error text-main m-4 capitalize"> * {formik.errors.password}</p> : ""}
+          {/* button submit or go to sign up */}
+          <Button className='w-full ' >تسجيل الدخول</Button>
+          <p className='uppercase font-semibold  text-gray-800 text-lg text-center'>اذا لم  تملك حساب</p>
+          <Link href="/signup" className='signup text-xl underline text-center block  '>انشاء حساب</Link>
+        </form>
+      </div>
 
     </section>
   )

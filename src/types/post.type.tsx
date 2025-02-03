@@ -7,7 +7,7 @@ export type postType = {
     name: string,
     photo?: string | undefined, // Optional, as not all users might have a profile photo
   },
-  createdAt: string, // ISO 8601 timestamp
+  createdAt: string, 
   comments: commentType[],
   id:string
 }

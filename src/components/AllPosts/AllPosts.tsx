@@ -19,19 +19,19 @@ export default function AllPosts() {
   const dispatch = useAppDispatch();
   const [currentPage, setCurrentPage] = useState<number>(1); // Track current page
   const { token } = useAppSelector((store) => store.userSlice);
-  const {setToken} = actions
-// get token
-useEffect(() => {
-  const token = localStorage.getItem("token");
-  dispatch(setToken(token)); // Dispatch an action to set the token
-});
-  // Fetch posts for the current page
+  const { setToken } = actions
+  // get token
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    dispatch(setToken(token)); // Dispatch an action to set the token
+  });
+  // data manegmaet ( Fetch Allposts ) 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["posts", currentPage], // Include currentPage in the query key
     queryFn: () => getAllPosts(currentPage), // Fetch data for the current page
   });
 
-  // Function to fetch posts
+  // Function to fetch AllPosts
   async function getAllPosts(page: number) {
     const options = {
       method: "GET",
@@ -52,6 +52,7 @@ useEffect(() => {
   if (isLoading) return <Loading className="flex justify-center" />;
   if (isError)
     return (
+      // if not login (not have token ) this link will appear
       <div className="flex justify-center text-main">
         <Link href="/signup" className="underline">
           ليس لديك حساب قم بانشاء حساب
@@ -61,24 +62,27 @@ useEffect(() => {
 
   return (
     <>
+      {/* Make a list of post that get from api */}
       <div className="space-y-8">
         {data?.posts.map((post: postType) => (
           <Post key={post._id} post={post} myPost={false} />
         ))}
       </div>
 
-      {/* Pagination Component */}
+      {/* Pagination Component for limit what page of posts i want to appear*/}
       <div className="flex justify-center mt-8 space-x-4 w-[80%]  mx-auto ">
+        {/* prev button funcion for prev page*/}
         <button
-          onClick={() => handlePageChange(currentPage -  1)}
-           disabled={currentPage === 1}
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
           className="px-4 py-2 bg-red-500 text-white rounded disabled:opacity-50"
         >
           Previous
         </button>
+        {/* Make a list of page post that if you want click in number of page and posts will come */}
         <Swiper
           spaceBetween={30}
-    
+
           onSlideChange={() => console.log('slide change')}
           onSwiper={(swiper) => console.log(swiper)}
           breakpoints={{
@@ -103,7 +107,7 @@ useEffect(() => {
               spaceBetween: 50,
             },
           }}
-          
+
         >
           {Array.from({ length: data?.paginationInfo.numberOfPages || 1 }, (_, i) => (
             <SwiperSlide key={i + 1}>
@@ -117,7 +121,7 @@ useEffect(() => {
             </SwiperSlide>
           ))}
         </Swiper>
-
+        {/* prev button  funcion for next page*/}
         <button
           onClick={() => handlePageChange(currentPage + 1)}
           disabled={currentPage === data?.paginationInfo.numberOfPages}

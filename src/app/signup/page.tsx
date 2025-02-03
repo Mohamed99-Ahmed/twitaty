@@ -105,6 +105,7 @@ export default function SignUp() {
               الاسم
             </label>
           </div>
+          {/* name error messege */}
           {formik.touched.name && formik.errors.name ? (
             <p className="error text-main m-4 capitalize">
               {" "}
@@ -133,6 +134,7 @@ export default function SignUp() {
               البريد الالكتروني
             </label>
           </div>
+          {/* email error messege */}
           {formik.touched.email && formik.errors.email ? (
             <p className="error text-main m-4 capitalize">
               {" "}
@@ -161,6 +163,7 @@ export default function SignUp() {
               الباسورد
             </label>
           </div>
+            {/* email error messege */}
           {formik.touched.password && formik.errors.password ? (
             <p className="error text-main m-4 capitalize">
               {" "}
@@ -189,6 +192,7 @@ export default function SignUp() {
               اعد كتابة الباسورد
             </label>
           </div>
+            {/* rePassword error messege */}
           {formik.touched.rePassword && formik.errors.rePassword ? (
             <p className="error text-main m-4 capitalize">
               {" "}
@@ -199,7 +203,6 @@ export default function SignUp() {
           )}
 
           {/* date of Birth */}
-
           <div className=" group">
             <label
               htmlFor="dateOfBirth"
@@ -221,6 +224,7 @@ export default function SignUp() {
               required
             />
           </div>
+            {/* date of birth error messege */}
           {formik.touched.dateOfBirth && formik.errors.dateOfBirth ? (
             <p className="error text-main m-4 capitalize">
               {" "}

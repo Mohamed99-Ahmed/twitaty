@@ -6,7 +6,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 // Create a client
 const queryClient = new QueryClient();
 export default function ReduxProvider({children}:{children:ReactNode}) {
-  
+  // redus provider for all website
   return (
     <>
     <Provider store={store}>

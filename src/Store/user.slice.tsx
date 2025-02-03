@@ -88,9 +88,10 @@ const user = createSlice({
     initialState,
     reducers: {
         LogOut: (state) => {
-            state.token = null;
+            state.token = null;   // reset token to null
             localStorage.removeItem("token"); // Clear token from localStorage
         },
+        // set token for update form component
         setToken: (state, action) => {
             state.token = action.payload;
         },

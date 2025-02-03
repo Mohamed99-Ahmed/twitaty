@@ -16,6 +16,7 @@ import { updateDataPost } from "@/Store/Posts.slice";
 
 // start Post component
 export default function Post({ post, myPost }: { post: postType; myPost: boolean }) {
+  // states
   const [settingPost, setSettingPost] = useState<boolean>(false);
   const [fComment, setFComment] = useState<boolean>(false);
   const [allComments, setAllComments] = useState<commentType[]>(post.comments);
@@ -27,6 +28,7 @@ export default function Post({ post, myPost }: { post: postType; myPost: boolean
 
   // Get comments of post
   async function getAllComments(id: string) {
+    // options of api
     const options = {
       method: "GET",
       url: `https://linked-posts.routemisr.com/posts/${id}/comments`,
@@ -34,14 +36,14 @@ export default function Post({ post, myPost }: { post: postType; myPost: boolean
         token,
       },
     };
+    const { data } = await axios.request(options);
+    console.log(data);
+    if (data.message == "success") {
+      // set the comments of post after get post
+      setAllComments(data.comments);
+      return data;
+    }
 
-      const { data } = await axios.request(options);
-      console.log(data);
-      if (data.message == "success") {
-        setAllComments(data.comments);
-        return data;
-      }
-   
   }
 
   // delete Post
@@ -58,6 +60,7 @@ export default function Post({ post, myPost }: { post: postType; myPost: boolean
       const { data } = await axios.request(options);
       if (data.message == "success") {
         toast.success("تم مسح البوست");
+        // after delete post refresh mypost function
         dispatch(getMyPosts(token));
         toast.dismiss(loadingToast);
       } else if (data.error == "user not found") {
@@ -73,6 +76,7 @@ export default function Post({ post, myPost }: { post: postType; myPost: boolean
   // update Post
   function updatePost(id: string, text: string, img: string) {
     dispatch(updateDataPost({ postId: id, postText: text, postImage: img }));
+    // go to top (place of createPost component)
     if (window.top) {
       window.top.scrollTo(0, 0);
     }
@@ -96,6 +100,7 @@ export default function Post({ post, myPost }: { post: postType; myPost: boolean
       console.log(data);
       if (data.message == "success") {
         toast.dismiss(toastBar);
+        // getAllcomments funcion refresh after update comment
         await getAllComments(post._id);
         toast.success(`تم تعديل التعليق `);
         setIdComment("");
@@ -103,7 +108,7 @@ export default function Post({ post, myPost }: { post: postType; myPost: boolean
       }
     } catch (data) {
       toast.dismiss(toastBar);
-      toast.error("ليس لديك احقية تغير تعليك غيرك"  );
+      toast.error("ليس لديك احقية تغير تعليك غيرك");
       console.log(data)
     }
   }
@@ -126,6 +131,7 @@ export default function Post({ post, myPost }: { post: postType; myPost: boolean
       const { data } = await axios.request(options);
       if (data.message == "success") {
         toast.dismiss(toastBar);
+         // getAllcomments funcion refresh after create comment
         setAllComments(data.comments);
         toast.success(`تم اضافة تعليقك "${inputComment?.current?.value}"`);
         return data;
@@ -199,14 +205,14 @@ export default function Post({ post, myPost }: { post: postType; myPost: boolean
       {/* start comments */}
       <div className="pt-5 bg-back p-4">
         <header className="flex justify-between items-center gap-4">
-          {/* close and open comment by this button */}
+          {/* close and open first comment by this button */}
           <TfiComments
             className="text-2xl font-semibold cursor-pointer"
             onClick={() => {
               setFComment(!fComment);
             }}
           />
-
+        {/* first comment input */}
           <input
             type="text"
             ref={inputComment}
@@ -214,7 +220,7 @@ export default function Post({ post, myPost }: { post: postType; myPost: boolean
             aria-label="write your comment here"
             required
           />
-
+        {/* handelsend funcition for create of update comment */}
           <IoSendSharp
             className="rotate-180 cursor-pointer text-xl"
             onClick={() => {
@@ -223,9 +229,8 @@ export default function Post({ post, myPost }: { post: postType; myPost: boolean
           />
         </header>
         <div
-          className={`overflow-hidden scale-y-0 h-0 opacity-0 origin-top transition-all duration-[1s] ${
-            fComment == true ? "scale-y-100 h-auto opacity-[1] overflow-auto" : ""
-          }`}
+          className={`overflow-hidden scale-y-0 h-0 opacity-0 origin-top transition-all duration-[1s] ${fComment == true ? "scale-y-100 h-auto opacity-[1] overflow-auto" : ""
+            }`}
         >
           {/* appear the first comment */}
           {post.comments.length > 0 && (
@@ -235,10 +240,10 @@ export default function Post({ post, myPost }: { post: postType; myPost: boolean
           {showAllComments &&
             allComments?.map((comment) => {
               return (
-                <Comment key={comment._id} postId={post._id} comment={comment} getAllComments ={getAllComments} inputComment={inputComment} setIdComment={setIdComment} />
+                <Comment key={comment._id} postId={post._id} comment={comment} getAllComments={getAllComments} inputComment={inputComment} setIdComment={setIdComment} />
               );
             })}
-
+          {/* Buttuon of handle display of all comment for user */}
           <Button
             className="mt-8 w-full"
             onClick={() => {
