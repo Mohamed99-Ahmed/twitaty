@@ -7,14 +7,14 @@
 twiatay website is a social app website that all peple can share imgs and post with communication with us .
 
 ## Libraries: 
-1. (Next.js ) Framwork single page application
+1. (Next.js with TypeScript  ) Framework single page application
 2. (TailwindCss) utiltes css
-3.  (Axios )  for fetching data from api
-4. (Redux )  for state mangment and send states in copmonents
+3.  (Axios )  for fetching data from Api
+4. (Redux )  for state manegement and send states in copmonents
 3. ( tanstack ) for data manegment
 4. (  swiper ) slider elements
 5.  (  Formik ) form submition
-6.  (  yub ) validation input in form
+6.  (  Yub ) validation input in form
 
 
 ___
